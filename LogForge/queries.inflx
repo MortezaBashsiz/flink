@@ -1,0 +1,33 @@
+#Select count(tag_user) FROM ( SELECT count("index") FROM "user" WHERE (("tag_index" = 'VIDEO_SEG' OR "tag_index" = 'INDEX' OR "tag_index" = 'FIRST_SEG')AND "tag_user" != 'null') AND $timeFilter GROUP BY "tag_user")
+
+#Select count(tag_movie) FROM ( SELECT count("index") FROM "movie" WHERE (("tag_index" = 'VIDEO_SEG' OR "tag_index" = 'INDEX' OR "tag_index" = 'FIRST_SEG')AND "tag_user" != 'null') AND $timeFilter GROUP BY "tag_movie")
+
+#SELECT sum("count") FROM "index" WHERE ("tag_index" = 'INDEX') AND $timeFilter
+
+#SELECT sum("count") *6 FROM "index" WHERE ("tag_index" = 'FIRST_SEG' OR "tag_index" = 'VIDEO_SEG') AND $timeFilter GROUP BY time($interval) fill(null)
+
+#SELECT count(tag_movie) FROM (SELECT count("movie") FROM "ovod" WHERE ("tag_up_route" != 'null' AND "tag_up_route" = 'ovod') AND $timeFilter GROUP BY time(1h), "tag_movie", "tag_token_md5", "tag_up_route" fill(null))
+
+#select tag_user ,top(usum,10) from (SELECT sum("count") as usum FROM "user" WHERE ("tag_index" = 'INDEX' AND "tag_user" != 'null') AND $timeFilter GROUP BY time(24h), "tag_user", "tag_index")
+
+#select tag_user ,top(usum,10) from (SELECT sum("count")*6 as usum FROM "user" WHERE (("tag_index" = 'FIRST_SEG'  OR "tag_index" = 'FALSE' ) AND "tag_user" != 'null') AND $timeFilter GROUP BY time(24h), "tag_user", "tag_index")
+
+#select tag_movie ,top(usum,10) from (SELECT sum("count") as usum FROM "movie" WHERE ("tag_index" = 'INDEX' AND "tag_movie" != 'null') AND $timeFilter GROUP BY time(24h), "tag_movie", "tag_index")
+
+#select tag_movie ,top(usum,10) from (SELECT sum("count")*6 as usum FROM "movie" WHERE (("tag_index" = 'FIRST_SEG'  OR "tag_index" = 'FALSE' ) AND "tag_movie" != 'null') AND $timeFilter GROUP BY time(24h), "tag_movie", "tag_index")
+
+#SELECT tag_ip,top(count,10) from ( SELECT sum("count") as count FROM "user_ip" WHERE ("tag_ip" != 'null') AND $timeFilter GROUP BY time(24h), "tag_ip")
+
+#SELECT tag_ip,top(byte,10) from ( SELECT sum("count") as byte FROM "ip_byte" WHERE ("tag_ip" != 'null') AND $timeFilter GROUP BY time(24h), "tag_ip")
+
+#SELECT tag_token_md5,TOP(ucount,10) from (SELECT count("tag_user_ip") as ucount FROM (SELECT sum("count") FROM "token" WHERE ("token_md5"  != 'null') and $timeFilter GROUP BY time($__interval), "tag_token_md5", "tag_user_ip" fill(none)) group by "tag_token_md5")
+
+#SELECT sum("count") AS "metric" FROM "country" WHERE $timeFilter GROUP BY "tag_token_md5", "tag_latitude", "tag_longitude"
+
+#select tag_organization ,top(usum,10) from (SELECT sum("count") as usum FROM "organization" WHERE ("tag_organization" != 'null') AND $timeFilter GROUP BY time(24h), "tag_organization")
+
+#SELECT sum("count") FROM "status" WHERE $timeFilter GROUP BY "tag_status"
+
+#SELECT tag_user_guid,TOP(ucount,10) from (	SELECT count("tag_token_md5") as ucount FROM (SELECT sum("count") FROM "user_guid"  WHERE ("user_guid"  != 'null') and $timeFilter GROUP BY time($__interval), "tag_user_guid", "tag_token_md5" fill(none) ) group by "tag_user_guid")
+
+#SELECT tag_user_guid,TOP(ucount,10) from (	SELECT count("tag_user_ip") as ucount FROM (SELECT sum("count") FROM "user_guid"  WHERE ("user_guid"  != 'null') and $timeFilter GROUP BY time($__interval), "tag_user_guid", "tag_user_ip" fill(none) ) group by "tag_user_guid")
